@@ -68,4 +68,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install sshpass
+        if: env.UPLOAD == 'true'
+        run: sudo apt-get install -y sshpass
 
+      - name: Upload files to external server
+        if: env.UPLOAD == 'true'
+        run: |
+          export SSHPASS="${{ secrets.SSH_PASS }}"
+          sshpass -e rsync -avz --delete -e "ssh -p ${{ secrets.PORT }} -o StrictHostKeyChecking=no" \
+            simple-script.sh \
+            simple-github-action.pdf \
+            simple-github-action.zip \
+            ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.REMOTE_PATH }}/
