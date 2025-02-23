@@ -1,7 +1,7 @@
 #!/bin/bash
 # Simple Bash script to show how github action work
 AUTHOR="ALIREZA.ZOLFAGHAR"
-VERSION="2.9.2"
+VERSION="2.9.3"
 VERSION_UPDATED="2025-02-21"
 UPLOAD_TO_ALIREZAZ=true
 echo "Hello World"
